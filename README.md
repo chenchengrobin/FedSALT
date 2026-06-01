@@ -5,6 +5,8 @@ FedSALT is a federated distillation training project with two algorithm entry op
 - one-shot: single-round aggregation and distillation
 - interation: multi-round iterative aggregation and distillation
 
+> **Note:** This repository provides a partial release of the core FedSALT implementation to illustrate the main algorithm components. The full experimental codebase is not included here. For access to the complete code or any questions, please open an issue on GitHub.
+
 ## Abstract
 
 Federated distillation (FD) methods assume that client predictions on shared public data are reliable for knowledge transfer. However, this assumption fails under label shift, where heterogeneous class distributions introduce two critical challenges: (1) Distributional misalignment causes local models to produce unreliable predictions for minority classes, leading to negative transfer. The predominant weighted-averaging aggregation assumes linear combinability of client predictions, an assumption violated under high heterogeneity, amplifying systematic biases. (2) Temporal inconsistency of pseudo-labels across communication rounds destabilizes the distillation process and impairs convergence. To address these problems, we propose Federated Similarity-Aware Learning and Consistency Tracking (FedSALT), which performs robust knowledge transfer through three components: a similarity-based knowledge selection mechanism, marginal contribution aggregation strategy, and a temporal consistency fusion mechanism. Extensive experiments demonstrate that FedSALT significantly outperforms baselines under diverse non-IID settings, achieving superior pseudo-label quality and stable convergence even under label shift and noisy clients.

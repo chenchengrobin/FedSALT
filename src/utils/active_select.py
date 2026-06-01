@@ -55,34 +55,5 @@ def aggregated_by_consensus(logits, mask, similarity, simple_size, eps=1e-8):
     mask_similarity = similarity * mask  # (N, select_num)
     mask_simple = simple_size * mask # (N, select_num)
 
-    denom_simple = mask_simple.sum(dim=1, keepdim=True)
-    base_alpha = mask_simple / (denom_simple + eps)  # (N, select_num)
-
-    mc = compute_margin_contributed(mask_similarity, mask_simple)  # (N, select_num)
-    denom_mc = mc.sum(dim=1, keepdim=True) # (N, 1)
-    sim_alpha = mc / (denom_mc + eps)  # (N, select_num)
-
-    alpha = (1 - base_alpha) * sim_alpha  # (N, select_num)
-    alpha = alpha / (alpha.sum(dim=1, keepdim=True) + eps)
-    aggregated_logit = (mask_logits * alpha.unsqueeze(2)).sum(dim=1) # (N, C)
+    aggregated_logit = mask_logits.mean(dim=1) # (N, C)
     return aggregated_logit
-
-
-def compute_margin_contributed(similarity, simple_size):
-    N, K = similarity.shape
-    mc = similarity * simple_size
-    mc_n = mc.sum(dim=1)  # (N, )
-
-    exclude_mask = 1 - torch.eye(K, dtype=torch.float32, device=similarity.device) # (K, K)
-    exclude_mask = exclude_mask.expand(N, -1, -1) # (N, K, K)
-
-    similarity_expand = similarity.unsqueeze(1).expand(-1, K, -1) # (N, K, K)
-    simple_expand = simple_size.unsqueeze(1).expand(-1, K, -1) # (N, K, K)
- 
-    masked_similarity = similarity_expand * exclude_mask
-    masked_simple = simple_expand * exclude_mask
-    mc_without_k = (masked_similarity * masked_simple).sum(dim=2) # (N, K)
-
-    mc = mc_n.unsqueeze(1) - mc_without_k # (N, K)
-    return mc
-

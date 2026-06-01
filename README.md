@@ -13,7 +13,7 @@ Federated distillation (FD) methods assume that client predictions on shared pub
 
 The following figure shows the overall pipeline of FedSALT.
 
-![FedSALT pipeline](src/fig/figure1.png)
+FedSALT pipeline
 
 ## 1. Environment Setup
 
@@ -81,7 +81,6 @@ FedSALT/
 |  |  |- active_select.py     # client selection and aggregation
 |  |  |- similarity.py        # similarity computation
 |- requirements.txt
-|- requirements-full.txt
 |- README.md
 ```
 
@@ -95,4 +94,3 @@ Output directories are created automatically.
 ## 6. Common Issues
 
 - The first run downloads MNIST and may take longer.
-

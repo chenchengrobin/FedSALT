@@ -13,13 +13,7 @@ Federated distillation (FD) methods assume that client predictions on shared pub
 
 The following figure shows the overall pipeline of FedSALT.
 
-![FedSALT pipeline](src/fig/figure1.png)
-
-## Training Curves
-
-The following figure presents training curves across multiple datasets and settings.
-
-![FedSALT training curves](src/fig/figure2.png)
+FedSALT pipeline
 
 ## 1. Environment Setup
 

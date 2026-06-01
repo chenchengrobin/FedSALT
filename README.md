@@ -13,7 +13,7 @@ Federated distillation (FD) methods assume that client predictions on shared pub
 
 The following figure shows the overall pipeline of FedSALT.
 
-FedSALT pipeline
+![FedSALT pipeline](src/fig/figure1.png)
 
 ## 1. Environment Setup
 
